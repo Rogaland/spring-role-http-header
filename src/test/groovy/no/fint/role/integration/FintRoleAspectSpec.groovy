@@ -1,6 +1,7 @@
 package no.fint.role.integration
 
 import no.fint.role.integration.testutils.TestApplication
+import no.fint.role.model.ResponseFintRole
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -8,9 +9,11 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-@SpringBootTest(classes = [TestApplication.class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration
+@SpringBootTest(classes = TestApplication, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FintRoleAspectSpec extends Specification {
 
     @Autowired
@@ -22,16 +25,12 @@ class FintRoleAspectSpec extends Specification {
         headers = new HttpHeaders()
     }
 
-    void cleanup() {
-        headers.clear()
-    }
-
     def "Sending correct role header and role"() {
         given:
-        headers.add("x-role", "FINT_ADMIN_PORTAL_USER")
+        headers.add('x-role', 'FINT_ADMIN_PORTAL_USER')
 
         when:
-        def response = restTemplate.exchange("/role1", HttpMethod.GET, new HttpEntity<>(headers), String)
+        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), String)
 
         then:
         response.statusCode == HttpStatus.OK
@@ -39,10 +38,10 @@ class FintRoleAspectSpec extends Specification {
 
     def "Sending custom role header and role"() {
         given:
-        headers.add("x-test-role", "FINT_ADMIN_PORTAL_USER")
+        headers.add('x-test-role', 'FINT_ADMIN_PORTAL_USER')
 
         when:
-        def response = restTemplate.exchange("/role2", HttpMethod.GET, new HttpEntity<>(headers), String)
+        def response = restTemplate.exchange('/role2', HttpMethod.GET, new HttpEntity<>(headers), String)
 
         then:
         response.statusCode == HttpStatus.OK
@@ -50,20 +49,23 @@ class FintRoleAspectSpec extends Specification {
 
     def "Missing role header"() {
         when:
-        def response = restTemplate.exchange("/role1", HttpMethod.GET, new HttpEntity<>(headers), String)
+        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), ResponseFintRole)
 
         then:
         response.statusCode == HttpStatus.BAD_REQUEST
+        response.body.message != null
     }
 
     def "Sending correct role header and wrong role"() {
         given:
-        headers.add("x-role", "FINT_ADMIN_PORTAL")
+        def headers = new HttpHeaders()
+        headers.add('x-role', 'FINT_ADMIN_PORTAL')
 
         when:
-        def response = restTemplate.exchange("/role1", HttpMethod.GET, new HttpEntity<>(headers), String)
+        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), ResponseFintRole)
 
         then:
         response.statusCode == HttpStatus.FORBIDDEN
+        response.body.message != null
     }
 }

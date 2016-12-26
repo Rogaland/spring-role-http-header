@@ -19,7 +19,7 @@ compile('no.fint:fint-role-http-header:0.0.1')
 ```
 ## Documentation
 If the role is present nothing will happen. If the header is missing a `MissingHeaderException` will be thrown.
-If the value in the header is not equal to the role in `@FintRole` a `ForbiddenException` is thrown.
+If the value in the header is not equal to the role in `@FintRole` a `RoleForbiddenException` is thrown.
 
 ### Annotations
 | Annotation        | Description           |

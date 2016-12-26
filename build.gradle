@@ -1,5 +1,5 @@
 plugins {
-	id "com.jfrog.bintray" version "1.7"
+    id "com.jfrog.bintray" version "1.7"
 }
 
 apply plugin: 'java'
@@ -10,26 +10,27 @@ group 'no.fint'
 version '0.0.2-SNAPSHOT'
 
 jar {
-	baseName = 'fint-role-http-header'
-	version = version
+    baseName = 'fint-role-http-header'
+    version = version
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-	mavenCentral()
-	mavenLocal()
+    mavenCentral()
+    mavenLocal()
 }
+
 apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-	compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
-	compile("org.projectlombok:lombok:${lombokVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+    compile("org.projectlombok:lombok:${lombokVersion}")
 
-	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-	testCompile("org.spockframework:spock-spring:1.1-groovy-2.4-rc-3")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testCompile("org.spockframework:spock-spring:${spockSpringVersion}")
 }
 
 if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
-	apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/bintray.gradle'
+    apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/bintray.gradle'
 }

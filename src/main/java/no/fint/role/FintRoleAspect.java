@@ -1,8 +1,8 @@
 package no.fint.role;
 
 import no.fint.role.annotations.FintRole;
-import no.fint.role.exceptions.ForbiddenException;
 import no.fint.role.exceptions.MissingHeaderException;
+import no.fint.role.exceptions.RoleForbiddenException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -33,12 +33,11 @@ public class FintRoleAspect {
             if (roleInHeader.get().equals(accessRole)) {
                 return proceedingJoinPoint.proceed();
             } else {
-                throw new ForbiddenException(String.format("The role '%s' has no access to this service.", roleInHeader.get()));
+                throw new RoleForbiddenException(String.format("The role '%s' has no access to this service.", roleInHeader.get()));
             }
         } else {
             throw new MissingHeaderException(String.format("Missing '%s' header.", roleHeaderName));
         }
-
     }
 
     private Optional<String> getRoleFromHeader(String roleHeaderName) {

@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ResponseFintRoleError {
+public class ResponseFintRole {
     private String message;
 }
