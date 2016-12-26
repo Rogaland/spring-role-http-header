@@ -22,24 +22,20 @@ If the role is present nothing will happen. If the header is missing a `MissingH
 If the value in the header is not equal to the role in `@FintRole` a `ForbiddenException` is thrown.
 
 ### Annotations
-|-------------------|-----------------------|
 | Annotation        | Description           |
 |-------------------|-----------------------|
 | @EnableFintRole   | Enables FINT roles    |
-|-------------------|-----------------------|
 | @FintRole         | Parameters:           |
 |                   |  - Name of the role   |
 |                   |  - Name of the header (default: 'x-role')|
-|-------------------|-----------------------|
+
 
 ### Exceptions
-|-------------------|-----------------------|
 | Exceptions        | Description           |
 |-------------------|-----------------------|
 | MissingHeaderException | Is thrown if the header is missing. |
-|-------------------|-----------------------|
 | ForbiddenException | Is thrown if the role in the header is not equal to the role in the @FintRole annotation. |
-|-------------------|-----------------------|
+
 
 ## Usage
 
@@ -49,14 +45,14 @@ If the value in the header is not equal to the role in `@FintRole` a `ForbiddenE
 
 ## Example
 
-```java
+````java
 @EnableFintRole
 @SpringBootApplication
 public class Application {
 ...
-```
+````
 
-```java
+````java
 @RestController
 @RequestMapping(value = "/test")
 public class Controller {
@@ -80,5 +76,4 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseFintRoleError(e.getMessage()));
     }
 }
-...
 ```
