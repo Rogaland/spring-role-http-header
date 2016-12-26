@@ -15,7 +15,7 @@ repositories {
     }
 }
 
-compile('no.fint:fint-role-http-header:0.0.1')
+compile('no.fint:fint-role-http-header:0.0.2')
 ```
 ## Documentation
 If the role is present nothing will happen. If the header is missing a `MissingHeaderException` will be thrown.
@@ -39,7 +39,7 @@ If the value in the header is not equal to the role in `@FintRole` a `RoleForbid
 
 - Set `@EnableFintRole` on your application class.
 - Set `@FintRole("HEADER_VALUE", "HEADER_NAME")` for each endpoint methods in your controller.
-- Implement exception handles for `ForbiddenException` and `MissingHeaderException`.
+- Implement exception handles for `RoleForbiddenException` and `MissingHeaderException`.
 
 ## Example
 
