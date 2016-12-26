@@ -60,9 +60,6 @@ public class Controller {
     @FintRole(role = "FINT_ADMIN_PORTAL_USER", "x-fint-role")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity test() {
-
-        RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-
         return ResponseEntity.ok().build();
     }
 
