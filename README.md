@@ -25,7 +25,7 @@ If the value in the header is not equal to the role in `@FintRole` a `ForbiddenE
 | Annotation        | Description           |
 |-------------------|-----------------------|
 | @EnableFintRole   | Enables FINT roles    |
-| @FintRole         | Parameters: <br>* Name of the role <br>* Name of the header (default: 'x-role') |
+| @FintRole         | Parameters: <br>- Name of the role <br>- Name of the header (default: 'x-role') |
 
 
 ### Exceptions
