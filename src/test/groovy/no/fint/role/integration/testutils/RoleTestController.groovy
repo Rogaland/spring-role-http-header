@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(value = "/role", method = RequestMethod.GET)
+@RequestMapping(value = "/", method = RequestMethod.GET)
 class RoleTestController {
 
     @FintRole(role = "FINT_ADMIN_PORTAL_USER")
-    @RequestMapping
-    ResponseEntity test() {
+    @RequestMapping(value = "/role1")
+    ResponseEntity test1() {
+        return ResponseEntity.ok().build()
+    }
+
+    @FintRole(role = "FINT_ADMIN_PORTAL_USER", roleHeaderName =  "x-test-role")
+    @RequestMapping(value = "/role2")
+    ResponseEntity test2() {
         return ResponseEntity.ok().build()
     }
 
