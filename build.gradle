@@ -1,0 +1,32 @@
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group 'no.fint'
+version '0.0.1-SNAPSHOT'
+
+jar {
+	baseName = 'fint-role-http-header'
+	version = version
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+	compile("org.projectlombok:lombok:${lombokVersion}")
+
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+	testCompile("org.spockframework:spock-spring:1.1-groovy-2.4-rc-3")
+}
+
+if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
+	apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/bintray.gradle'
+}
