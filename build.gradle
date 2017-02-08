@@ -21,7 +21,6 @@ repositories {
     mavenLocal()
 }
 
-//apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
 apply from: 'https://raw.githubusercontent.com/Rogaland/rfk-buildscripts/master/dependencies.gradle'
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
@@ -33,6 +32,5 @@ dependencies {
 }
 
 if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
-    //apply from: 'https://raw.githubusercontent.com/FINTprosjektet/rogfk-buildscripts/master/bintray.gradle'
     apply from: 'https://raw.githubusercontent.com/Rogaland/rfk-buildscripts/master/bintray.gradle'
 }

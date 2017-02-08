@@ -19,7 +19,7 @@ import java.util.Optional;
 @Component
 public class HttpHeaderRoleAspect {
 
-    @Around("@annotation(no.fint.role.annotations.HttpHeaderRole)")
+    @Around("@annotation(no.rogfk.role.annotations.HttpHeaderRole)")
     public Object executeEndpoint(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         Method requestMethod = signature.getMethod();
