@@ -1,8 +1,8 @@
-package no.fint.role;
+package no.rogfk.role;
 
-import no.fint.role.annotations.FintRole;
-import no.fint.role.exceptions.MissingHeaderException;
-import no.fint.role.exceptions.RoleForbiddenException;
+import no.rogfk.role.annotations.HttpHeaderRole;
+import no.rogfk.role.exceptions.MissingHeaderException;
+import no.rogfk.role.exceptions.RoleForbiddenException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,16 +17,16 @@ import java.util.Optional;
 
 @Aspect
 @Component
-public class FintRoleAspect {
+public class HttpHeaderRoleAspect {
 
-    @Around("@annotation(no.fint.role.annotations.FintRole)")
+    @Around("@annotation(no.fint.role.annotations.HttpHeaderRole)")
     public Object executeEndpoint(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         Method requestMethod = signature.getMethod();
 
-        FintRole fintRole = requestMethod.getAnnotation(FintRole.class);
-        String accessRole = fintRole.role();
-        String roleHeaderName = fintRole.roleHeaderName();
+        HttpHeaderRole httpHeaderRole = requestMethod.getAnnotation(HttpHeaderRole.class);
+        String accessRole = httpHeaderRole.role();
+        String roleHeaderName = httpHeaderRole.roleHeaderName();
 
         Optional<String> roleInHeader = getRoleFromHeader(roleHeaderName);
         if (roleInHeader.isPresent()) {

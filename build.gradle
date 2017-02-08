@@ -6,11 +6,11 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-group 'no.fint'
-version '0.0.3-SNAPSHOT'
+group 'no.rogfk'
+version '0.0.1-SNAPSHOT'
 
 jar {
-    baseName = 'fint-role-http-header'
+    baseName = 'spring-role-http-header'
     version = version
 }
 sourceCompatibility = 1.8
@@ -21,7 +21,8 @@ repositories {
     mavenLocal()
 }
 
-apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
+//apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
+apply from: 'https://raw.githubusercontent.com/Rogaland/rfk-buildscripts/master/dependencies.gradle'
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
@@ -32,5 +33,6 @@ dependencies {
 }
 
 if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
-    apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/bintray.gradle'
+    //apply from: 'https://raw.githubusercontent.com/FINTprosjektet/rogfk-buildscripts/master/bintray.gradle'
+    apply from: 'https://raw.githubusercontent.com/Rogaland/rfk-buildscripts/master/bintray.gradle'
 }

@@ -1,6 +1,6 @@
-package no.fint.role.annotations;
+package no.rogfk.role.annotations;
 
-import no.fint.role.FintRoleConfig;
+import no.rogfk.role.HttpHeaderRoleConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Import(FintRoleConfig.class)
-public @interface EnableFintRole {
+@Import(HttpHeaderRoleConfig.class)
+public @interface EnableHttpHeaderRole {
 }

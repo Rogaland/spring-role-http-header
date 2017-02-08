@@ -1,9 +1,9 @@
-package no.fint.role.integration.testutils;
+package no.rogfk.role.integration.testutils;
 
-import no.fint.role.annotations.EnableFintRole;
+import no.rogfk.role.annotations.EnableHttpHeaderRole;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@EnableFintRole
+@EnableHttpHeaderRole
 @SpringBootApplication
 public class TestApplication {
 }

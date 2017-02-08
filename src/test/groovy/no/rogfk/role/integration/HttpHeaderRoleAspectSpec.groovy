@@ -1,7 +1,7 @@
-package no.fint.role.integration
+package no.rogfk.role.integration
 
-import no.fint.role.integration.testutils.TestApplication
-import no.fint.role.model.ResponseFintRole
+import no.rogfk.role.integration.testutils.TestApplication
+import no.rogfk.role.model.ResponseHttpHeaderRole
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -14,7 +14,7 @@ import spock.lang.Specification
 
 @ContextConfiguration
 @SpringBootTest(classes = TestApplication, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class FintRoleAspectSpec extends Specification {
+class HttpHeaderRoleAspectSpec extends Specification {
 
     @Autowired
     private TestRestTemplate restTemplate
@@ -49,7 +49,7 @@ class FintRoleAspectSpec extends Specification {
 
     def "Missing role header"() {
         when:
-        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), ResponseFintRole)
+        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), ResponseHttpHeaderRole)
 
         then:
         response.statusCode == HttpStatus.BAD_REQUEST
@@ -62,7 +62,7 @@ class FintRoleAspectSpec extends Specification {
         headers.add('x-role', 'FINT_ADMIN_PORTAL')
 
         when:
-        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), ResponseFintRole)
+        def response = restTemplate.exchange('/role1', HttpMethod.GET, new HttpEntity<>(headers), ResponseHttpHeaderRole)
 
         then:
         response.statusCode == HttpStatus.FORBIDDEN

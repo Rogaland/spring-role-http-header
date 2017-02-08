@@ -15,7 +15,7 @@ repositories {
     }
 }
 
-compile('no.fint:fint-role-http-header:0.0.2')
+compile('no.rogfk:fint-role-http-header:0.0.2')
 ```
 ## Documentation
 If the role is present nothing will happen. If the header is missing a `MissingHeaderException` will be thrown.
